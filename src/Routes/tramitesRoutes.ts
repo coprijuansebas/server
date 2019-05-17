@@ -10,7 +10,8 @@ class TramitesRoutes{
 	}
 
 	config(): void {
-		this.router.get('/', tramitesControllers.index);
+		this.router.get('/', tramitesControllers.list);
+		this.router.get('/:id', tramitesControllers.getOne);
 		this.router.post('/', tramitesControllers.create);
 		this.router.put('/:id', tramitesControllers.update);
 		this.router.delete('/:id', tramitesControllers.delete);

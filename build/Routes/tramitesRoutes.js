@@ -11,7 +11,8 @@ class TramitesRoutes {
         this.config();
     }
     config() {
-        this.router.get('/', tramitesControllers_1.default.index);
+        this.router.get('/', tramitesControllers_1.default.list);
+        this.router.get('/:id', tramitesControllers_1.default.getOne);
         this.router.post('/', tramitesControllers_1.default.create);
         this.router.put('/:id', tramitesControllers_1.default.update);
         this.router.delete('/:id', tramitesControllers_1.default.delete);
