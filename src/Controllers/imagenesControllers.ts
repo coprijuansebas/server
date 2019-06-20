@@ -16,7 +16,8 @@ var store = multer.diskStorage({
 
 var upload = multer({ storage: store,
 limits:{
-    fileSize: 10485760
+    fileSize:  10485760,
+    fieldSize: 52428800
 }}).single('file');
 
 class ImagenesController {
@@ -50,8 +51,8 @@ class ImagenesController {
 
     // CAROUSEL
     // Guardar imagen en la ruta del dsico duro y guardar nombre en base de datos para recuperarlo mas tarde 
-    public create(req: any, res: any, next: any) {
-        upload(req, res, async (err: any): Promise<any> => {
+    public async create(req: any, res: any, next: any) {
+        await upload(req, res, async (err: any): Promise<any> => {
             if (err) {
                 return res.status(501).json({ error: err });
             } else {
@@ -63,8 +64,8 @@ class ImagenesController {
     }
 
     // BANNER
-    public createb(req: any, res: any, next: any) {
-        upload(req, res, async (err: any): Promise<any> => {
+    public async createb(req: any, res: any, next: any) {
+        await upload(req, res, async (err: any): Promise<any> => {
             if (err) {
                 return res.status(501).json({ error: err });
             } else {
@@ -75,8 +76,8 @@ class ImagenesController {
     }
 
     // CONOCENOS
-    public createc(req: any, res: any, next: any) {
-        upload(req, res, async (err: any): Promise<any> => {
+    public async createc(req: any, res: any, next: any) {
+        await upload(req, res, async (err: any): Promise<any> => {
             if (err) {
                 return res.status(501).json({ error: err });
             } else {

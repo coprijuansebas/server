@@ -23,7 +23,8 @@ var store = multer.diskStorage({
 });
 var upload = multer({ storage: store,
     limits: {
-        fileSize: 10485760
+        fileSize: 10485760,
+        fieldSize: 52428800
     } }).single('file');
 class ImagenesController {
     // CARUSEL
@@ -60,40 +61,46 @@ class ImagenesController {
     // CAROUSEL
     // Guardar imagen en la ruta del dsico duro y guardar nombre en base de datos para recuperarlo mas tarde 
     create(req, res, next) {
-        upload(req, res, (err) => __awaiter(this, void 0, void 0, function* () {
-            if (err) {
-                return res.status(501).json({ error: err });
-            }
-            else {
-                console.log(req.file.originalname);
-                yield database_1.default.query("INSERT INTO images (`image`) VALUES ('" + req.file.originalname + "')");
-                return res.json({ originalname: req.file.originalname, uploadname: req.file.filename });
-            }
-        }));
+        return __awaiter(this, void 0, void 0, function* () {
+            yield upload(req, res, (err) => __awaiter(this, void 0, void 0, function* () {
+                if (err) {
+                    return res.status(501).json({ error: err });
+                }
+                else {
+                    console.log(req.file.originalname);
+                    yield database_1.default.query("INSERT INTO images (`image`) VALUES ('" + req.file.originalname + "')");
+                    return res.json({ originalname: req.file.originalname, uploadname: req.file.filename });
+                }
+            }));
+        });
     }
     // BANNER
     createb(req, res, next) {
-        upload(req, res, (err) => __awaiter(this, void 0, void 0, function* () {
-            if (err) {
-                return res.status(501).json({ error: err });
-            }
-            else {
-                yield database_1.default.query("UPDATE imagesb SET image='" + req.file.originalname + "' WHERE id = 1");
-                return res.json({ originalname: req.file.originalname, uploadname: req.file.filename });
-            }
-        }));
+        return __awaiter(this, void 0, void 0, function* () {
+            yield upload(req, res, (err) => __awaiter(this, void 0, void 0, function* () {
+                if (err) {
+                    return res.status(501).json({ error: err });
+                }
+                else {
+                    yield database_1.default.query("UPDATE imagesb SET image='" + req.file.originalname + "' WHERE id = 1");
+                    return res.json({ originalname: req.file.originalname, uploadname: req.file.filename });
+                }
+            }));
+        });
     }
     // CONOCENOS
     createc(req, res, next) {
-        upload(req, res, (err) => __awaiter(this, void 0, void 0, function* () {
-            if (err) {
-                return res.status(501).json({ error: err });
-            }
-            else {
-                yield database_1.default.query("UPDATE imagesc SET image='" + req.file.originalname + "' WHERE id = 1");
-                return res.json({ originalname: req.file.originalname, uploadname: req.file.filename });
-            }
-        }));
+        return __awaiter(this, void 0, void 0, function* () {
+            yield upload(req, res, (err) => __awaiter(this, void 0, void 0, function* () {
+                if (err) {
+                    return res.status(501).json({ error: err });
+                }
+                else {
+                    yield database_1.default.query("UPDATE imagesc SET image='" + req.file.originalname + "' WHERE id = 1");
+                    return res.json({ originalname: req.file.originalname, uploadname: req.file.filename });
+                }
+            }));
+        });
     }
     update(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
