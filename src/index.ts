@@ -25,11 +25,11 @@ class Server {
 	config(): void {
 		this.app.set('port', process.env.PORT || 5000);
 		this.app.use(morgan('dev'));
-		this.app.use(cors({credentials: true, origin: 'http://localhost:4200'}));
+		this.app.use(cors({credentials: true, origin: 'https://coprised.000webhostapp.com'}));
 		this.app.use(express.json());
 		this.app.use(express.urlencoded({ extended: false }));
 		this.app.use((req, res, next) => {
-			res.setHeader('Access-Control-Allow-Origin', 'http://localhost:4200');
+			res.setHeader('Access-Control-Allow-Origin', 'https://coprised.000webhostapp.com');
 			res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-type, Accept');
 			res.setHeader('Access-Control-Allow-Methods', 'POST, GET, PATCH, DELETE, OPTIONS');
 			next();
